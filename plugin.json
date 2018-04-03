@@ -1,0 +1,10 @@
+{
+  "plugin": {
+	"name": "tekken_learning",
+	"description": "Cycles through different Tekken games, communicates with Python neural network",
+	"version": "0.0.1",
+	"author": "Riel Fox",
+	"type": "plugin",
+	"start": "false"
+  }
+}

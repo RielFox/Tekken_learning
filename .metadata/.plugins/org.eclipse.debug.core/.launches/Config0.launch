@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<launchConfiguration type="org.eclipse.ldt.debug.core.lualocaldebug">
+<stringAttribute key="mainScript" value=""/>
+<listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_PATHS">
+<listEntry value="/tekken_learning"/>
+</listAttribute>
+<listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_TYPES">
+<listEntry value="4"/>
+</listAttribute>
+<booleanAttribute key="org.eclipse.dltk.launching.debugConsole" value="false"/>
+<stringAttribute key="process_factory_id" value="org.eclipse.dltk.launching.scriptProcessFactory"/>
+<stringAttribute key="project" value="tekken_learning"/>
+</launchConfiguration>
