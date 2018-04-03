@@ -20,28 +20,33 @@
         --get a seed for random numbers  
         math.randomseed(os.time())  
 
-        --randomly select between Tekken 1,2,3 and Tag  
+        --Randomly select between Tekken 1,2,3 and Tag  
         tekken_played = math.random(4)  
         print('Number selected: ' .. tostring(tekken_played))  
 
         local tekken_played = 1  
         local driver
-        --load the correct Tekken  
+        --Load the correct Tekken, driver is the name of the rom file in /roms directory of MAME
         if tekken_played == 1  then   
             emu.print_verbose('Loading Tekken (1994)...')  
             driver = 'tekken'  
+            
         elseif tekken_played == 2  then
-            print('Loading Tekken 2 (1995)...')  
+            emu.print_verbose('Loading Tekken 2 (1995)...')  
+            driver = 'tekken2ub'  
+           
         elseif tekken_played == 3  then
-            print('Loading Tekken 3 (1996)...')  
+            emu.print_verbose('Loading Tekken 3 (1996)...') 
+            driver = 'tekken3ud'
+            
         elseif tekken_played == 4  then
-            print('Loading Tekken TAG (1999)...')  
-
+            emu.print_verbose('Loading Tekken TAG (1999)...')
+            driver = 'tektagtub'
         end
 
         local co = coroutine.create(function()
             emu.unpause() -- at the menu the program is paused so wait will hang
-            emu.wait(3)
+            --emu.wait(3)
             print('starting ' .. driver)
             emu.start(driver)
         end)
