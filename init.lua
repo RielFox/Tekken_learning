@@ -1,13 +1,19 @@
-
+--local screen = manager:machine().screens[":screen"]
+--local cpu = manager:machine().devices[":maincpu"]
+--local mem = cpu.spaces["program"]
+local machine = manager:machine()
+--local ioport = manager:machine():ioport()
 
  local exports = {}
     exports.name = "tekken_learning"
     exports.version = "0.0.1"
-    exports.description = "Cycles through different Tekken games, >communicates with Python neural network"
+    exports.description = "Cycles through different Tekken games, communicates with Python neural network."
     exports.license = "The BSD 3-Clause License"
     exports.author = { name = "Riel Fox" }
 
     local dummy = exports
+    change_game = true
+    
 
     function sleep (a)
         local sec = tonumber(os.clock() + a);
@@ -24,11 +30,11 @@
         tekken_played = math.random(4)  
         print('Number selected: ' .. tostring(tekken_played))  
 
-        local tekken_played = 1  
+        --local tekken_played = 1  
         local driver
         --Load the correct Tekken, driver is the name of the rom file in /roms directory of MAME
         if tekken_played == 1  then   
-            emu.print_verbose('Loading Tekken (1994)...')  
+            print('Loading Tekken (1994)...')  
             driver = 'tekken'  
             
         elseif tekken_played == 2  then
@@ -45,28 +51,45 @@
         end
 
         local co = coroutine.create(function()
+        
+        while true do
             emu.unpause() -- at the menu the program is paused so wait will hang
-            --emu.wait(3)
+            emu.wait(1)
             print('starting ' .. driver)
             emu.start(driver)
+            coroutine.yield()
+            end
         end)
 
         --os.pullEvent("key")
 
         --sleep(3) 
         print('aaa')
-        coroutine.resume(co)
+        print(coroutine.status(co))
+        if change_game
+        then
+          print('bbb')
+          change_game = false
+          coroutine.resume(co)
+        
+        end
+        print(coroutine.status(co))
         --sleep(5)
-        emu.pause()
+        --emu.pause()
+        
+       --print(machine)
         
     end
 
 
     function dummy.startplugin()
         emu.register_start(function()
-            main()
+            
             emu.print_verbose("Starting " .. emu.gamename())
+            main()
+            
         end)
+
 
         emu.register_stop(function()  
             emu.print_verbose("Exiting " .. emu.gamename())  
